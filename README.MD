@@ -5,6 +5,7 @@
 1. Buat Database terlebih dahulu. Harap simpan nama DB (1).
 2. Jika tidak memiliki root, mohon buat User Database terlebih dahulu dan beri koneksi ke Database yang telah dibuat. Harap simpan nama User (2) dan Password (3).
 3. Execute SQL: /install/table.sql
+4. Hapus folder /install/ setelah execute.
 
 ### G+
 1. Ikuti tutorial pembuatan Google+ API -> http://www.w3resource.com/API/google-plus/tutorial.php
@@ -13,8 +14,8 @@
 4. Ambil G+ Client Secret. Harap Simpan (6).
 
 ### Settings.php
-1. Copy: settings.sample.php -> settings.php
-2. Buka dan ubah settings.php sesuai database kamu.
+1. Copy: /include/settings.sample.php -> /include/settings.php
+2. Buka dan ubah /include/settings.php sesuai database kamu.
 3. *$mysql_host* : Tempat kamu menyimpan database, biasanya berbentuk IP atau Domain. Default: Localhost
 4. *$mysql_username* : (2) / Default: root
 5. *$mysql_password* : (3) / Default: 
