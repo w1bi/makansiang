@@ -7,7 +7,7 @@
 3. Execute SQL: /install/table.sql
 
 ### G+
-1. Ikuti tutorial pembuatan Google+ API ->
+1. Ikuti tutorial pembuatan Google+ API -> http://www.w3resource.com/API/google-plus/tutorial.php
 2. Ambila Nama G+ App. Harap Simpan (4).
 3. Ambil G+ Client ID. Harap simpan (5).
 4. Ambil G+ Client Secret. Harap Simpan (6).
