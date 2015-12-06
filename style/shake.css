@@ -1,0 +1,43 @@
+@keyframes shake-doge {
+	0% {
+		transform: rotate(0deg); }
+	100% {
+		transform: rotate(360deg); }
+}
+
+.donator-user {
+	animation: shake-doge 2000ms linear infinite;
+}
+
+.donator-user:hover {
+	animation-play-state: paused;
+}
+
+@keyframes quota-bubble {
+	50% {
+		transform: translate(0, -1px);  }
+}
+
+.people-quota-available {
+	animation: quota-bubble 500ms ease-in-out infinite;
+}
+
+.people-quota-available:nth-child(5n+1) {
+	-webkit-animation-delay: 100ms;
+	animation-delay: 100ms;
+}
+
+.people-quota-available:nth-child(5n+2) {
+	-webkit-animation-delay: 200ms;
+	animation-delay: 200ms;
+}
+
+.people-quota-available:nth-child(5n+3) {
+	-webkit-animation-delay: 300ms;
+	animation-delay: 300ms;
+}
+
+.people-quota-available:nth-child(5n+4) {
+	-webkit-animation-delay: 400ms;
+	animation-delay: 400ms;
+}
