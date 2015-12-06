@@ -383,10 +383,11 @@
 			}
 			
 			if(isset($simplified_array_info[$p_id])) {
+				$temp_text = preg_replace('((\<br\ \/\>\n*\s*)+)', '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $simplified_array_info[$p_id]);
 				echo "<br />";
 				echo "<div class=\"listminified-smallinfo\">";
 				echo "<strong>Info:</strong> ";
-				echo str_replace("<br />", "", $simplified_array_info[$p_id]);
+				echo $temp_text;
 				echo "</div>";
 			}
 			
