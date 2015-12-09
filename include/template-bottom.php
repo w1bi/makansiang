@@ -100,6 +100,10 @@
 <script type="text/javascript">
 $('.menu-detail').on('click', function() {
 	if($('#main-food-autocomplete').length) {
+		
+		$('html, body').animate({
+			scrollTop: $("#table-container").offset().top - 60
+		}, 1000);
 	
 		if($('#main-food-autocomplete').is(":disabled")) {
 			return;

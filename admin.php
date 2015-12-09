@@ -327,10 +327,13 @@
     </div>
 </div>
 <?php
+	$order_counter_per_menu = 0;
 	if(count($simplified_array) > 0) {
 		echo '<div id="listminified" class="hide">';
 		sort($simplified_array);
 		for($i = 0; $i < count($simplified_array); $i++) {
+			$order_counter_per_menu++;
+			
 			$menu_sort	= $simplified_array[$i];
 			$split_it	= explode("\n-\n", $menu_sort, 4);
 			$p_name		= $split_it[0];
@@ -356,35 +359,52 @@
 			}
 			
 			if($p_name_before != $p_name) {
-				echo "<h3>" . ucwords(htmlentities($p_name)) . "</h3>";
-			}
-			
-			echo "<strong><em>";
-			echo ucwords(htmlentities($p_user));
-			echo "</em></strong>";
-			
-			echo "<div class=\"listminified-detail\">";
-			
-			if($p_tag != "") {
-				$p_tags		= explode(",", $p_tag);
+				$order_counter_per_menu = 1;
 				
-				foreach($p_tags as $tag) {
-					echo "<div class=\"listminified-smallinfo-tag\">";
-					echo ucwords(htmlentities(trim($tag)));
+				echo "<h3>" . ucwords(htmlentities($p_name)) . "</h3>";
+				
+				if($p_tag != "") {
+					echo "<div style=\"margin-bottom: 5px; text-align: center;\">";
+					
+					$p_tags		= explode(",", $p_tag);
+					foreach($p_tags as $tag) {
+						echo "<div class=\"listminified-smallinfo-tag\">";
+						echo ucwords(htmlentities(trim($tag)));
+						echo "</div>";
+					}
+					
 					echo "</div>";
 				}
 			}
 			
-			echo ucwords(htmlentities($p_name));
-			
 			if($p_name_next == $p_name && $p_id_next == $p_id) {
 				$i++;
-				echo " <strong><em>[ x2 ]</em></strong>";
+				
+				echo "<strong><em>";
+				echo $order_counter_per_menu . ". ";
+				echo "[ x2 ] ";
+				echo ucwords(htmlentities($p_user));
+				echo "</em></strong><br />";
+				
+				$order_counter_per_menu++;
+				
+				echo "<strong><em>";
+				echo $order_counter_per_menu . ". ";
+				echo "[ x2 ] ";
+				echo ucwords(htmlentities($p_user));
+				echo "</em></strong>";
 			}
+			else {
+				echo "<strong><em>";
+				echo $order_counter_per_menu . ". ";
+				echo ucwords(htmlentities($p_user));
+				echo "</em></strong>";
+			}
+			
+			echo "<div class=\"listminified-detail\">";
 			
 			if(isset($simplified_array_info[$p_id])) {
 				$temp_text = preg_replace('((\<br\ \/\>\n*\s*)+)', '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $simplified_array_info[$p_id]);
-				echo "<br />";
 				echo "<div class=\"listminified-smallinfo\">";
 				echo "<strong>Info:</strong> ";
 				echo $temp_text;
