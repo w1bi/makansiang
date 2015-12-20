@@ -241,6 +241,7 @@
                                class="text<?php if($form_makanan_id != ""){ ?> menu-readonly<?php } ?>"
                                placeholder="Ketik Nama Menu"
                                value="<?php echo htmlentities($form_makanan); ?>"
+                               required
 							   <?php if(!$is_open ){ ?> disabled<?php } ?>
 							   <?php if($form_makanan_id != ""){ ?> readonly="readonly"<?php } ?>
                                />
@@ -298,7 +299,7 @@
                 <tr>
                 	<td valign="top">Pakai Uang (Rp):</td>
                     <td>
-                    	<input type="text" name="uang" class="numberformat" placeholder="50.000" value="<?php echo htmlentities($form_pesanuang); ?>"<?php if(!$is_open){ ?> disabled<?php } ?>/>
+                    	<input type="text" name="uang" class="numberformat" placeholder="50.000" value="<?php echo htmlentities($form_pesanuang); ?>" required<?php if(!$is_open){ ?> disabled<?php } ?>/>
                     </td>
                 </tr>
                 <tr>

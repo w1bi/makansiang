@@ -6,7 +6,7 @@
 			<?php
 				
 				$quota_is_open			= (date('Gi') >= $config['max_order_time']) ? false : true;
-                $count_quota_green = 0;
+                $count_quota_green		= 0;
 				
 				if($quota_is_open) {
 					if(isset($pesanan_sekarang)) {

@@ -95,12 +95,13 @@
         </div>
 		<div class="harga">
 			<?php
-            	if($is_login && $email_user == $login_data['user_email'] && $is_open) {
+            	if($is_login && $email_user == $login_data['user_email']) {
 			?>
-            <a class="button-inline" href="<?php echo $config['full_domain']; ?>makan-dong">Ubah</a>
+            <a id="me-order-change" class="button-inline hide" href="<?php echo $config['full_domain']; ?>makan-dong">Ubah</a>
+            <span id="me-order-time"><?php echo 'Jam: ' . $waktu_pesanan[0] . '.' . $waktu_pesanan[1]; ?></span>
             <?php
             	}
-				elseif($waktu_pesanan[0] != '00' || $waktu_pesanan[1] != '00') {
+				else {
 					echo 'Jam: ' . $waktu_pesanan[0] . '.' . $waktu_pesanan[1];
 				}
 			?>
@@ -121,26 +122,33 @@
 	?>
 </div>
 <script type="text/javascript">	
-	var $num_user = 0;
-	
-	$('.find-user').on('keyup', function() {
-		var findString = new RegExp($(this).val(), 'i');
+	$(document).ready(function() {
+		var $num_user = 0;
 		
-		$num_user = 0;
-		
-		$('.perone').hide();
-		$('.perone').filter(function(){
-			if($num_user >= <?php echo $max_user; ?>) {
+		$('.find-user').on('keyup', function() {
+			var findString = new RegExp($(this).val(), 'i');
+			
+			$num_user = 0;
+			
+			$('.perone').hide();
+			$('.perone').filter(function(){
+				if($num_user >= <?php echo $max_user; ?>) {
+					return false;
+				}
+				
+				if($(this).find('.user').text().match(findString)) {
+					$num_menu++;
+					return true;
+				}
+				
 				return false;
-			}
-			
-			if($(this).find('.user').text().match(findString)) {
-				$num_menu++;
-				return true;
-			}
-			
-			return false;
-		}).show();
+			}).show();
+		});
+		
+		if($('#me-order-change').length > 0 && $('.button-quota-pesan').length > 0) {
+			$('#me-order-change').show();
+			$('#me-order-time').hide();
+		}
 	});
 </script>
 <?php
