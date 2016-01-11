@@ -798,24 +798,35 @@ div#listorang div.perone.donor div.info-header {
 
 div#listminified {
 	padding: 10px;
+	position: relative;
+}
+
+div#listminified div.minify-per-one {
+	position: relative;
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+	width: 47%;
+	margin: 0.5%;
+	padding: 0.5%;
+	box-shadow: 0 0 2px #B7B7B7;
 }
 
 div#listminified h3 {
-	padding: 2px;
-	margin: 15px 0px 10px;
+	padding: 5px 10px;
+	margin: 0;
 	font-size: 14px;
 	font-weight: 600;
 	text-align: center;
 	background-color: #e8efff;
-	border-radius: 2px;
 }
 
 div#listminified .listminified-smallinfo {
 	font-size: 12px;
 	padding: 2px 5px;
+	margin: 0;
 	background-color: #A6E4F9;
 	display: inline-block;
-	border-radius: 5px;
 	text-align: left;
 }
 
@@ -823,9 +834,8 @@ div#listminified .listminified-smallinfo-tag {
 	font-size: 10px;
 	padding: 1px 3px;
 	background-color: #DAF1F3;
-	margin-right: 3px;
+	margin-left: 5px;
 	display: inline-block;
-	border-radius: 5px;
 	text-align: left;
 	vertical-align: 1px;
 	font-style: italic;
@@ -834,6 +844,34 @@ div#listminified .listminified-smallinfo-tag {
 div#listminified .listminified-detail {
 	margin-left: 15px;
 	margin-bottom: 10px;
+}
+
+div#listminified .total-pesanan {
+	margin-bottom: 10px;
+	font-style:italic;
+	border-bottom: 5px solid #e8efff;
+	padding: 4px;
+}
+
+#print-button  {
+	background-color: #BACFFF;
+	font-size: 14px;
+	color: #000000;
+	padding: 15px 20px;
+	cursor: pointer;
+	border-bottom: 1px solid #5C8DFF;
+	transition: background-color 250ms ease 0s, color 250ms ease 0s;
+	display: block;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	text-align: center;
+	font-weight: 600;
+}
+
+#print-button:hover, #print-button:active {
+	background-color: #5C8DFF;
+	color: #FFFFFF;
 }
 
 a.button-inline, .button-inline  {
@@ -869,6 +907,12 @@ a.button-inline-pesan, .button-inline-pesan  {
 a.button-inline-pesan:hover, a.button-inline-pesan:active, .button-inline-pesan:hover, .button-inline-pesan:active {
 	background-color: #5C8DFF;
 	color: #FFFFFF;
+}
+
+@media screen and (max-width: 980px){
+	div#listminified div.minify-per-one {
+		width: 95%;
+	}
 }
 
 

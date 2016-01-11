@@ -80,7 +80,7 @@
         Yang Makan!
         <?php if($status < 0) { ?>
         <span class="float-right quota-list">
-            <a href="javascript:void(0);" class="button-inline-pesan" id="changemode_button">Mode Hanya Teks &raquo;</a>
+            <a href="<?php echo $config['full_domain'] . "daftar-pesanan-text/" . $get_time_minus; ?>" class="button-inline-pesan">Mode Hanya Teks &raquo;</a>
         </span>
         <?php } ?>
     </h1>
@@ -151,7 +151,6 @@
 			$select_lantai = $_COOKIE['ai_b'];
 		}
 	?>
-    <div id="listtoomuchdetail">
 	<div class="filter-container">
 		<?php
             $cookie_search_name = "";
@@ -180,8 +179,6 @@
 		
 		$pesanan_estimasi_terpakai	= 0;
 		$pesanan_counter			= 0;
-		$simplified_array 			= array();
-		$simplified_array_info		= array();
 		
 		while($list_pesanan = mysqli_fetch_array($list_query)) {
 			$pesanan_counter++;
@@ -196,6 +193,7 @@
 			$uang_terpakai	= $list_pesanan['pesan_uang_terpakai'];
 			$uang_donasi	= $list_pesanan['pesan_uang_donasi'];
 			$uang_kembali	= $uang - $uang_terpakai - $uang_donasi;
+			$uang_terpakai_tambah_donasi	= $uang_terpakai + $uang_donasi;
 			
 			$donatur		= ($uang_donasi > 0) ? true : false;
 			
@@ -209,8 +207,6 @@
 				$menu_jml	= $preg_arr[2];
 				$menu_obj	= $global_menu['menu_' . $menu_id];
 				
-				$simplified_array[]		= $menu_obj['menu_nama'] . "\n-\n" . $nama_user . "\n-\n" . $pesanan_id . "\n-\n" . $menu_obj['menu_tag'] ;
-				
 				$pesanan_tags = array_merge($pesanan_tags, $menu_obj['tags']);
 				$uang_makanan += $menu_obj['menu_harga'];
 				$the_subtitute = htmlentities($menu_obj['menu_nama']);
@@ -221,7 +217,6 @@
 				
 				$the_subtitute .= " <span class=\"pesanan-jumlah\"> - Rp. " . number_format(($menu_jml * $menu_obj['menu_harga']), 0, ',', '.') . "</span>";
 				
-				//$pesanan	= str_replace($the_string, $the_subtitute, $pesanan);
 				$pesanan = implode($the_subtitute, explode($the_string, $pesanan, 2));
 			}
 			
@@ -238,7 +233,7 @@
 					$the_subtitute	=  "<div class=\"info-header\">Info Tambahan</div>";
 					$the_subtitute	.= "<div class=\"pesanan-info\">" . $preg_arr[1] . "</div>";
 					
-					$simplified_array_info[$pesanan_id] = $preg_arr[1];
+					$simplified_array_user_info['order_' . $pesanan_id] = $preg_arr[1];
 				}
 				
 				$pesanan = str_replace($the_string, $the_subtitute, $pesanan);
@@ -287,12 +282,7 @@
                 <?php } elseif($pesanan_status == 1) { ?>
                 
                 Rp <?php echo number_format($uang, 0, '', '.'); ?>
-                - Rp <?php echo number_format($uang_terpakai, 0, '', '.'); ?>
-                
-				<?php if($uang_donasi > 0) { ?>
-                - [D] <?php echo number_format($uang_donasi, 0, '', '.'); ?>
-                <?php } ?>
-                
+                - Rp <?php echo number_format($uang_terpakai_tambah_donasi, 0, '', '.'); ?>
 				= Rp <?php echo number_format($uang_kembali, 0, '', '.'); ?>&nbsp;
                 
                 <input type="hidden" name="terpakai" value="<?php echo $uang_terpakai; ?>" />
@@ -301,12 +291,7 @@
                 <?php } elseif($pesanan_status >= 2) { ?>
                 
                 Rp <?php echo number_format($uang, 0, '', '.'); ?>
-                - Rp <?php echo number_format($uang_terpakai, 0, '', '.'); ?>
-                
-				<?php if($uang_donasi > 0) { ?>
-                - [D] <?php echo number_format($uang_donasi, 0, '', '.'); ?>
-                <?php } ?>
-                
+                - Rp <?php echo number_format($uang_terpakai_tambah_donasi, 0, '', '.'); ?>
 				= Rp <?php echo number_format($uang_kembali, 0, '', '.'); ?>
                 <?php } ?>
             </form>
@@ -325,97 +310,6 @@
 		}
 	?>
     </div>
-</div>
-<?php
-	$order_counter_per_menu = 0;
-	if(count($simplified_array) > 0) {
-		echo '<div id="listminified" class="hide">';
-		sort($simplified_array);
-		for($i = 0; $i < count($simplified_array); $i++) {
-			$order_counter_per_menu++;
-			
-			$menu_sort	= $simplified_array[$i];
-			$split_it	= explode("\n-\n", $menu_sort, 4);
-			$p_name		= $split_it[0];
-			$p_user		= $split_it[1];
-			$p_id		= $split_it[2];
-			$p_tag		= $split_it[3];
-			
-			$p_id_next		= -999;
-			$p_name_next	= "";
-			$p_name_before 	= "";
-			
-			if($i < count($simplified_array)-1) {
-				$menu_sort_next	= $simplified_array[$i+1];
-				$split_it_next	= explode("\n-\n", $menu_sort_next, 4);
-				$p_name_next	= $split_it_next[0];
-				$p_id_next		= $split_it_next[2];
-			}
-			
-			if($i > 0) {
-				$menu_sort_before	= $simplified_array[$i-1];
-				$split_it_before	= explode("\n-\n", $menu_sort_before, 4);
-				$p_name_before		= $split_it_before[0];
-			}
-			
-			if($p_name_before != $p_name) {
-				$order_counter_per_menu = 1;
-				
-				echo "<h3>" . ucwords(htmlentities($p_name)) . "</h3>";
-				
-				if($p_tag != "") {
-					echo "<div style=\"margin-bottom: 5px; text-align: center;\">";
-					
-					$p_tags		= explode(",", $p_tag);
-					foreach($p_tags as $tag) {
-						echo "<div class=\"listminified-smallinfo-tag\">";
-						echo ucwords(htmlentities(trim($tag)));
-						echo "</div>";
-					}
-					
-					echo "</div>";
-				}
-			}
-			
-			if($p_name_next == $p_name && $p_id_next == $p_id) {
-				$i++;
-				
-				echo "<strong><em>";
-				echo $order_counter_per_menu . ". ";
-				echo "[ x2 ] ";
-				echo ucwords(htmlentities($p_user));
-				echo "</em></strong><br />";
-				
-				$order_counter_per_menu++;
-				
-				echo "<strong><em>";
-				echo $order_counter_per_menu . ". ";
-				echo "[ x2 ] ";
-				echo ucwords(htmlentities($p_user));
-				echo "</em></strong>";
-			}
-			else {
-				echo "<strong><em>";
-				echo $order_counter_per_menu . ". ";
-				echo ucwords(htmlentities($p_user));
-				echo "</em></strong>";
-			}
-			
-			echo "<div class=\"listminified-detail\">";
-			
-			if(isset($simplified_array_info[$p_id])) {
-				$temp_text = preg_replace('((\<br\ \/\>\n*\s*)+)', '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $simplified_array_info[$p_id]);
-				echo "<div class=\"listminified-smallinfo\">";
-				echo "<strong>Info:</strong> ";
-				echo $temp_text;
-				echo "</div>";
-			}
-			
-			echo "</div>";
-		}
-		echo '</div>';
-	}
-?>
 <script src="<?php echo $config['full_domain']; ?>scripts/jquery.number.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$('.numberformat').number(true, 0, ',', '.');
@@ -483,17 +377,6 @@
 	<?php if($is_cookie_search) { ?>
 	searchComplex(true);
 	<?php } ?>
-	
-	$('#changemode_button').on('click', function() {
-		$('#listminified').toggle();
-		$('#listtoomuchdetail').toggle();
-		if($('#listminified').is(':visible')) {
-			$(this).html('&laquo; Kembali');
-		}
-		else {
-			$(this).html('Mode Hanya Teks &raquo;');
-		}
-	});
 	
 	$('#estimasi-uang').html("Rp <?php echo number_format($pesanan_estimasi_terpakai, 0, '', '.'); ?>");
 </script>

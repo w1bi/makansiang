@@ -39,6 +39,31 @@ RewriteRule ^daftar\-pesanan/([0-9]+)/?$ admin.php?notdirect&rwd=$1 [L,QSA]
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 
+RewriteRule ^daftar\-pesanan\-text/?$ admin-text.php [L,QSA]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule ^daftar\-pesanan\-text/([0-9]+)/?$ admin-text.php?notdirect&rwd=$1 [L,QSA]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule ^daftar\-pesanan\-print/?$ admin-print.php [L,QSA]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule ^daftar\-pesanan\-print/([0-9]+)/?$ admin-print.php?notdirect&rwd=$1 [L,QSA]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule ^daftar\-pesanan/([0-9]+)/?$ admin.php?notdirect&rwd=$1 [L,QSA]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
 RewriteRule ^tambah\-saldo/?$ admin-add-saldo.php [L,QSA]
 
 RewriteCond %{SCRIPT_FILENAME} !-f
