@@ -137,7 +137,7 @@
     <div class="clear"></div>
     
     
-    <a href="javascript:void();" id="print-button">Cetak Halaman Ini &raquo;</a>
+    <a href="javascript:void();" id="print-button">Versi Cetak &raquo;</a>
     
     <?php 		
 		$query_status = "";

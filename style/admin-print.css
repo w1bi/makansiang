@@ -1,0 +1,163 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:600,600italic,300,400,400italic);
+
+body {
+	font-family: "Open Sans", "Segoe UI", Tahoma, Verdana;
+	font-weight: 400;
+	font-size: 12px;
+	background-color: #FFFFFF !important;
+}
+
+div {
+	page-break-inside: avoid;
+}
+
+.listminified-smallinfo {
+	font-size: 11px;
+	padding: 2px 5px;
+	margin: 0;
+	background-color: #A6E4F9 !important;
+	display: inline-block;
+	text-align: left;
+	-webkit-print-color-adjust: exact; 
+}
+
+.listminified-smallinfo-tag {
+	font-size: 10px;
+	padding: 1px 3px;
+	background-color: #DAF1F3 !important;
+	margin-left: 5px;
+	display: inline-block;
+	text-align: left;
+	vertical-align: 1px;
+	font-style: italic;
+	-webkit-print-color-adjust: exact; 
+}
+
+.listminified-detail {
+	margin-left: 15px;
+	margin-bottom: 5px;
+}
+
+.minify-per-one {
+	position: relative;
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+	width: 47%;
+	margin: 0.5%;
+	padding: 0.5%;
+	float: left;
+	border: 1px solid #8D8D8D;
+	display: none;
+}
+
+h3 {
+	padding: 2px 4px;
+	margin: 0;
+	font-size: 14px;
+	font-weight: 600;
+	text-align: center;
+	background-color: #e8efff !important;
+	-webkit-print-color-adjust: exact; 
+}
+
+div#listminified .total-pesanan {
+	margin-bottom: 10px;
+	font-style:italic;
+	border-bottom: 5px solid #e8efff;
+	padding: 4px;
+}
+
+#print-button  {
+	background-color: #BACFFF;
+	font-size: 14px;
+	color: #000000;
+	padding: 15px 20px;
+	cursor: pointer;
+	border-bottom: 1px solid #5C8DFF;
+	transition: background-color 250ms ease 0s, color 250ms ease 0s;
+	display: block;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	text-align: center;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+#print-button:hover, #print-button:active {
+	background-color: #5C8DFF;
+	color: #FFFFFF;
+}
+
+.small-button {
+	background-color: #BACFFF;
+	font-size: 14px;
+	color: #000000;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-bottom: 1px solid #5C8DFF;
+	transition: background-color 250ms ease 0s, color 250ms ease 0s;
+	margin: 5px;
+	text-align: center;
+	font-weight: 600;
+	text-decoration: none;
+	float: left;
+}
+
+.small-button:hover, .small-button:active {
+	background-color: #5C8DFF;
+	color: #FFFFFF;
+}
+
+#area-select {
+	padding: 5px;
+	position: relative;
+	clear: both;
+	float: none;
+	font-size: 11px;
+	border: 1px solid #8D8D8D;
+}
+
+#area-select h3 {
+	text-align: left;
+	margin-bottom: 2px;
+}
+
+#area-select label {
+	display: block;
+	float: left;
+	width: 29%;
+	margin: 2px;
+	padding: 2px;
+	transition: background-color ease-in-out 500ms;
+	cursor: pointer;
+}
+
+#area-select label.checked {
+	background-color: #83ADF3;
+}
+
+#area-select label:hover {
+	background-color: #e8efff;
+}
+
+#area-select .area-name {
+	float: left;
+	padding-left: 25px;
+	position: relative;
+	display: block;
+}
+
+#area-select .menu_list_show {
+	position: absolute;
+	left: 1px;
+	top: 1px;
+}
+
+
+@media print {
+	#area-select {
+		display: none;
+	}	
+}

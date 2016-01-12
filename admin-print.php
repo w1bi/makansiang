@@ -25,111 +25,12 @@
 ?>
 <html>
 <head>
-<title>Print MSG - <?php echo $info_date; ?></title>
-<style>
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:600,600italic,300,400,400italic);
-body {
-	font-family: "Open Sans", "Segoe UI", Tahoma, Verdana;
-	font-weight: 400;
-	font-size: 12px;
-}
-
-div {
-	page-break-inside: avoid;
-}
-
-.listminified-smallinfo {
-	font-size: 11px;
-	padding: 2px 5px;
-	margin: 0;
-	background-color: #A6E4F9;
-	display: inline-block;
-	text-align: left;
-}
-
-.listminified-smallinfo-tag {
-	font-size: 10px;
-	padding: 1px 3px;
-	background-color: #DAF1F3;
-	margin-left: 5px;
-	display: inline-block;
-	text-align: left;
-	vertical-align: 1px;
-	font-style: italic;
-}
-
-.listminified-detail {
-	margin-left: 15px;
-	margin-bottom: 5px;
-}
-
-.minify-per-one {
-	position: relative;
-	-webkit-column-break-inside: avoid;
-	-moz-column-break-inside: avoid;
-	column-break-inside: avoid;
-	width: 47%;
-	margin: 0.5%;
-	padding: 0.5%;
-	float: left;
-	border: 1px solid #CCCCCC;
-}
-
-h3 {
-	padding: 2px 4px;
-	margin: 0;
-	font-size: 14px;
-	font-weight: 600;
-	text-align: center;
-	background-color: #e8efff;
-}
-
-div#listminified .total-pesanan {
-	margin-bottom: 10px;
-	font-style:italic;
-	border-bottom: 5px solid #e8efff;
-	padding: 4px;
-}
-</style>
+	<title>Print MSG - <?php echo $info_date; ?></title>
+	<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <link rel="shortcut icon" type="image/ico" href="<?php echo $config['full_domain']; ?>favicon.ico"/>
+    <link href="<?php echo $config['full_domain']; ?>style/admin-print.css" rel="stylesheet" type="text/css">
 </head>
-<body onload="window.print();window.close();">
-<?php
-	if(isset($_POST['id']) && isset($_POST['status'])) {
-		$id 			= trim($_POST['id']);
-		$status			= trim($_POST['status']);
-		$uang_terpakai	= "";
-		
-		$form_uang_terpakai	= (isset($_POST['terpakai'])) ? str_replace('.', '', trim($_POST['terpakai'])) : 'not a number lol';
-		
-		if(ctype_digit($form_uang_terpakai)) {
-			$uang_terpakai	= $form_uang_terpakai;
-		}
-		
-		if(ctype_digit($id) && ctype_digit($status)) {
-			$uang_terpakai_query = "";
-			if($uang_terpakai != "") {
-				$uang_terpakai_query = ", pesan_uang_terpakai = $uang_terpakai";
-			}
-			
-			$query = "
-				UPDATE ms_pesanan
-				SET
-				pesan_status = $status
-				$uang_terpakai_query				
-				WHERE
-				pesan_id = $id
-			";
-			
-			// Exec
-			mysqli_query($mysql, $query);
-		}
-		
-		$refback = isset($_POST['refback']) ? trim($_POST['refback']) : $config['full_domain']."daftar-pesanan";
-		
-		header("Location: " . $refback);
-		die;
-	}
-?>
+<body>
 <?php	
 	$query_status = "";
 	
@@ -216,9 +117,30 @@ div#listminified .total-pesanan {
 	}
 	
 	if(count($simplified_array_menu) > 0) {
-		echo '<div id="listminified">';
 		sort($simplified_array_menu);
 		$simplified_array_menu_unique = array_values(array_unique($simplified_array_menu));
+		
+		echo "<div id=\"area-select\">\n";
+		echo "<h3>Pilih Menu:</h3>\n";
+		echo "<div id=\"check-all-button\" class=\"small-button\">Centang Semua!</div>\n";
+		echo "<div id=\"uncheck-all-button\" class=\"small-button\">Hilangkan Semua Centang!</div>\n";
+		echo "<div style=\"float: none; clear: both;\"></div>\n";
+		for($i = 0; $i < count($simplified_array_menu_unique); $i++) {
+			$menu_sort	= $simplified_array_menu_unique[$i];
+			$split_it	= explode("\n-\n", $menu_sort, 3);
+			$p_name		= $split_it[0];
+			$p_m_id		= $split_it[1];
+			$p_tag		= $split_it[2];
+			
+			echo "<label class=\"area-name\">";
+			echo "<input type=\"checkbox\" id=\"menu_" . $p_m_id . "\" class=\"menu_list_show\">";
+			echo htmlentities($p_name, ENT_QUOTES);
+			echo "</label>";
+		}
+		echo "<div style=\"float: none; clear: both;\"></div>\n";
+		echo "<a href=\"javascript:window.print();\" id=\"print-button\">Cetak Halaman Ini!</a>\n";
+		echo "</div>\n";
+		echo "<div id=\"listminified\">\n";
 		for($i = 0; $i < count($simplified_array_menu_unique); $i++) {
 			$menu_sort	= $simplified_array_menu_unique[$i];
 			$split_it	= explode("\n-\n", $menu_sort, 3);
@@ -229,7 +151,7 @@ div#listminified .total-pesanan {
 			$array_menu_list	= $simplified_array_menu_user['menu_' . $p_m_id];
 			$total_list			= count($array_menu_list);
 			
-			echo "\n\n<div class=\"minify-per-one\">";
+			echo "\n\n<div class=\"minify-per-one\" id=\"box_menu_" . $p_m_id . "\">";
 			echo "<h3>" . ucwords(htmlentities($p_name)) . "</h3>";				
 			echo "<div class=\"total-pesanan\">Total: <strong>$total_list Pesanan</strong>";
 			if($p_tag != "") {
@@ -300,5 +222,34 @@ div#listminified .total-pesanan {
 		echo ' - ';
 	}
 ?>
+
+<script src="<?php echo $config['full_domain']; ?>scripts/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$('.menu_list_show').on('change', function() {
+	this_id = $(this).attr('id');
+	has_class_checked = $(this).parent().hasClass('checked');
+	
+	if(has_class_checked) {
+		$(this).parent().removeClass('checked');
+		$('#box_' + this_id).hide();
+	}
+	else {
+		$(this).parent().addClass('checked');
+		$('#box_' + this_id).show();
+	}
+});
+
+$('#check-all-button').on('click', function() {
+	$('.menu_list_show').prop('checked', true);
+	$('.area-name').addClass('checked');
+	$('.minify-per-one').show();
+});
+
+$('#uncheck-all-button').on('click', function() {
+	$('.menu_list_show').prop('checked', false);
+	$('.area-name').removeClass('checked');
+	$('.minify-per-one').hide();
+});
+</script>
 </body>
 </html>
