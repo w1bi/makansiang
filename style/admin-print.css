@@ -92,7 +92,7 @@ div#listminified .total-pesanan {
 
 .small-button {
 	background-color: #BACFFF;
-	font-size: 14px;
+	font-size: 12px;
 	color: #000000;
 	padding: 5px 10px;
 	cursor: pointer;
@@ -100,7 +100,6 @@ div#listminified .total-pesanan {
 	transition: background-color 250ms ease 0s, color 250ms ease 0s;
 	margin: 5px;
 	text-align: center;
-	font-weight: 600;
 	text-decoration: none;
 	float: left;
 }
