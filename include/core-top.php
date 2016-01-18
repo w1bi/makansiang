@@ -4,6 +4,7 @@
 	include 'include/settings.php';
 	include 'include/mysql.php';
 	include 'include/global-function.php';
+	include 'include/JBBCode/Parser.php';
 	
 	// check logout
 	if(isset($_GET['logout'])) {

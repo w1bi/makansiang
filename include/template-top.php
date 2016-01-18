@@ -75,7 +75,15 @@
             <div id="notice">
 			<?php
                 while($data = mysqli_fetch_array($notice_query)) {
-					$pengumuman = str_replace("\n", "<br />", htmlentities($data['peng_text'], ENT_QUOTES));
+					$parser = new JBBCode\Parser();
+					$parser->addCodeDefinitionSet(new JBBCode\DefaultCodeDefinitionSet());
+					$parser->addBBCode("sup", '<sup>{param}</sup>');
+					$parser->addBBCode("sub", '<sub>{param}</sub>');
+					$parser->addBBCode("s", '<strike>{param}</strike>');
+					
+					$parser->parse(htmlentities($data['peng_text'], ENT_QUOTES));
+					
+					$pengumuman = str_replace("\n", "<br />", $parser->getAsHtml());
 					if($pengumuman == "") {
 						continue;
 					}

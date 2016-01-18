@@ -39,6 +39,28 @@
 		if(preg_match('/\/A+I\/A+\//i', $login_data['user_photo'])) {
 			$form_error	= "PROFILWOI";
 		}
+		
+		// Check Last, is it paid?
+		$check_last_paid = mysqli_query($mysql, "
+							SELECT pesan_status, pesan_tanggal
+							FROM ms_pesanan
+							WHERE
+								pesan_user_email = '" . mysqli_real_escape_string($mysql, $login_data['user_email']) . "'
+								AND pesan_tanggal <> '$now_date'
+							ORDER BY pesan_id DESC
+							LIMIT 0,1
+						");
+	
+		if($check_last_paid_fetch = mysqli_fetch_array($check_last_paid)) {
+			$is_max_open = $check_last_paid_fetch[0];
+			
+			if($check_last_paid_fetch[0] < 2) {
+				$is_open = false;
+				$date = explode("-", $check_last_paid_fetch[1]);
+				$date_string = $date[2]."/".$date[1]."/".$date[0];
+				$form_error = "Pesanan kamu tanggal " . $date_string . " belum dibayar!\nSegera hubungi OB atau ke Lantai 7!";
+			}
+		}
 	}
 	
 	if(isset($_POST['send'])) {
@@ -71,6 +93,10 @@
 		
 		if($form_error == "" && (!isset($global_menu['menu_' . $form_makanan_id]) || $form_makanan == "" || $form_pesanuang == "" || !ctype_digit($form_pesanuang))) {
 			$form_error = "Harap isi pesanan dengan lengkap";
+		}
+		
+		if($form_error == "" && ($form_tambahan != "" && $form_tambahan_id == "")) {
+			$form_error = "Menu Tambahan harus dipilih dari menu!";
 		}
 		
 		if($form_error == "") {
@@ -198,13 +224,13 @@
                 dan lakukan <a href="<?php echo $config['full_domain']; ?>?relog">Login Ulang</a>.
              </div>
             <?php } else { ?>
-			<div class="err-text-block"><?php echo htmlentities($form_error, ENT_QUOTES); ?></div>
+			<div class="err-text-block"><?php echo str_replace("\n", "<br />", htmlentities($form_error, ENT_QUOTES)); ?></div>
             <?php } ?>
 		<?php } ?>
         <?php if(!$is_open) { ?>
         	<?php if(date('Gi') > $config['max_order_time']) { ?>
 			<div class="err-text-block">Waktu Pemesanan Telah Habis</div>
-            <?php } else { ?>
+            <?php } elseif ($form_error == "") { ?>
 			<div class="err-text-block">Kuota Penuh: <strong><?php echo $config['max_order']; ?></strong> Pemesan Tercapai</div>
             <?php } ?>
 		<?php } ?>

@@ -41,6 +41,7 @@
 <?php 
 	include "include/template-top.php";
 ?>
+
 <h1>Pengumuman</h1>
 <div id="table-container">
 <form enctype="application/x-www-form-urlencoded" method="post" action="<?php echo $config['full_domain']; ?>daftar-pengumuman">
@@ -55,6 +56,21 @@
 	<input type="hidden" value="1" name="cancel" />
 </form>
 </div>
+
+<link rel="stylesheet" href="<?php echo $config['full_domain']; ?>scripts/sceditor/themes/square.min.css" type="text/css" media="all" />
+<script type="text/javascript" src="<?php echo $config['full_domain']; ?>scripts/sceditor/jquery.sceditor.bbcode.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("textarea").sceditor({
+			plugins: "bbcode",
+			style: "<?php echo $config['full_domain']; ?>scripts/sceditor/jquery.sceditor.default.min.css",
+			toolbar: "bold,italic,underline,strike|subscript,superscript",
+			resizeEnabled: false,
+			height: "300px",
+			autofocus: true,
+		});
+	});
+</script>
 <?php
 	include "include/template-bottom.php";
 ?>
