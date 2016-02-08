@@ -138,7 +138,7 @@
 			echo "</label>";
 		}
 		echo "<div style=\"float: none; clear: both;\"></div>\n";
-		echo "<a href=\"javascript:window.print();\" id=\"print-button\">Cetak Halaman Ini!</a>\n";
+		echo "<a href=\"javascript:printThis();\" id=\"print-button\">Cetak Halaman Ini!</a>\n";
 		echo "</div>\n";
 		echo "<div id=\"listminified\">\n";
 		for($i = 0; $i < count($simplified_array_menu_unique); $i++) {
@@ -250,6 +250,11 @@ $('#uncheck-all-button').on('click', function() {
 	$('.area-name').removeClass('checked');
 	$('.minify-per-one').hide();
 });
+
+function printThis() {
+    $('#area-select').find('.checked').addClass('printed').attr('title', 'Telah di-print');
+	window.print();
+}
 </script>
 </body>
 </html>

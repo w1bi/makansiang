@@ -189,10 +189,8 @@
 			$email_user		= htmlentities($list_pesanan['pesan_user_email'], ENT_QUOTES);
 			$photo			= htmlentities($list_pesanan['pesan_user_photo'], ENT_QUOTES);
 			$pesanan		= str_replace("\n", "<br />", htmlentities($list_pesanan['pesan_text'], ENT_QUOTES));
-			$uang			= $list_pesanan['pesan_uang'];
 			$uang_terpakai	= $list_pesanan['pesan_uang_terpakai'];
 			$uang_donasi	= $list_pesanan['pesan_uang_donasi'];
-			$uang_kembali	= $uang - $uang_terpakai - $uang_donasi;
 			$uang_terpakai_tambah_donasi	= $uang_terpakai + $uang_donasi;
 			
 			$donatur		= ($uang_donasi > 0) ? true : false;
@@ -263,7 +261,7 @@
                 <?php  } ?>
             </div>
         </div>
-        <div class="harga">
+        <div class="harga harga-admin">
             <form action="<?php echo $config['full_domain']; ?>daftar-pesanan" method="post" enctype="application/x-www-form-urlencoded" onSubmit="return clickForm(this);">
                 <input type="hidden" name="id" value="<?php echo $pesanan_id; ?>" />
                 <input type="hidden" name="status" value="<?php echo $pesanan_status + 1; ?>" />
@@ -281,18 +279,13 @@
                 
                 <?php } elseif($pesanan_status == 1) { ?>
                 
-                Rp <?php echo number_format($uang, 0, '', '.'); ?>
-                - Rp <?php echo number_format($uang_terpakai_tambah_donasi, 0, '', '.'); ?>
-				= Rp <?php echo number_format($uang_kembali, 0, '', '.'); ?>&nbsp;
-                
                 <input type="hidden" name="terpakai" value="<?php echo $uang_terpakai; ?>" />
-                <input type="submit" class="button-inline" value="Lunas" />
+                <input type="submit" class="button-inline bold-dikit" value="Rp <?php echo number_format($uang_terpakai_tambah_donasi, 0, '', '.'); ?> - Lunas" />
                 
                 <?php } elseif($pesanan_status >= 2) { ?>
                 
-                Rp <?php echo number_format($uang, 0, '', '.'); ?>
-                - Rp <?php echo number_format($uang_terpakai_tambah_donasi, 0, '', '.'); ?>
-				= Rp <?php echo number_format($uang_kembali, 0, '', '.'); ?>
+                Rp <?php echo number_format($uang_terpakai_tambah_donasi, 0, '', '.'); ?>
+                
                 <?php } ?>
             </form>
         </div>

@@ -137,6 +137,11 @@ div#listminified .total-pesanan {
 	background-color: #83ADF3;
 }
 
+#area-select label.printed {
+	background-color: #000000 !important;
+	color: #FFFFFF !important;
+}
+
 #area-select label:hover {
 	background-color: #e8efff;
 }

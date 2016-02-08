@@ -127,6 +127,10 @@ input.button.cancel:hover, input.button.cancel:active {
 	clear: both;
 }
 
+.bold-dikit {
+	font-weight: 600 !important;
+}
+
 h1 {
 	font-family: "Open Sans", "Segoe UI", Tahoma, Verdana;
 	border-left: 5px solid #BACFFF;
@@ -368,7 +372,6 @@ a.top .menu-line-container.rotate {
 
 #a-left-dock.hide-dock {
 	left: -300px;
-	box-shadow: none;
 }
 
 #a-left-dock-user {
@@ -491,6 +494,73 @@ a.top .menu-line-container.rotate {
 		font-size: 11px;
 	}
 }
+
+@media screen and (min-width: 800px){
+	body {
+		margin-left: 70px;
+	}
+	
+	#a-left-dock {
+		transition: width 250ms ease 0s;
+	}
+	
+	#a-left-dock.hide-dock {
+		left: 0px;
+		width: 70px;
+	}
+	
+	#a-left-dock #a-left-dock-nav {
+		transition: text-indent 150ms ease 200ms;
+		white-space: nowrap;
+	}
+	
+	#a-left-dock.hide-dock #a-left-dock-nav {
+		text-indent: 100%;
+		overflow: hidden;
+	}
+	
+	#a-left-dock.hide-dock .user-photo {
+		text-indent: 0%;
+	}
+	
+	#a-left-dock #a-left-dock-nav a {
+		transition: background-color 250ms ease 0s, color 250ms ease 0s, padding-left 150ms ease 200ms;
+	}
+	
+	#a-left-dock.hide-dock #a-left-dock-nav a {
+		padding-left: 27px !important;
+	}
+	
+	#a-left-dock #a-left-dock-user {
+		transition: height 250ms ease 0ms;
+	}
+	
+	#a-left-dock.hide-dock #a-left-dock-user {
+		height: 70px;
+	}
+	
+	#a-left-dock #a-left-dock-user .user-name, #a-left-dock #a-left-dock-user .user-email {
+		transition: text-indent 100ms ease 0ms;
+	}
+	
+	#a-left-dock.hide-dock #a-left-dock-user .user-name, #a-left-dock.hide-dock #a-left-dock-user .user-email {
+		text-indent: 100%;
+		overflow: hidden;
+	}
+	
+	#a-left-dock #a-left-dock-user .user-photo {
+		transition: width 200ms ease 0s, height 200ms ease 0s, margin 200ms ease 0s;
+	}
+	
+	#a-left-dock.hide-dock #a-left-dock-user .user-photo {
+		margin-top: 5px;
+	    margin-left: 4px;
+		width: 60px;
+		height: 60px;
+	}
+
+}
+
 /* Admin Menu */
 
 a.button-admin, a.button-admin-right {
@@ -583,6 +653,20 @@ a.button-admin-next-prev.next {
 .small-text-info {
 	font-size: 11px;
 	color: #666666;
+}
+
+.harga-admin {
+	font-size: 14px !important;
+}
+
+.harga-admin .small-text {
+	font-size: 14px !important;
+	width: 100px !important;
+}
+
+.harga-admin .button-inline {
+	font-size: 14px !important;
+	padding: 4px 14px 3px;
 }
 
 .hide {

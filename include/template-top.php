@@ -41,7 +41,7 @@
     <div id="a-left-dock" class="hide-dock">
     	<div id="a-left-dock-user">
         	<?php if($is_login) { ?>
-        	<img class="user-photo" src="<?php echo htmlentities(preg_replace('/\?sz\=[0-9]+/i', '', $login_data['user_photo'])); ?>?sz=75" />
+        	<img class="user-photo" src="<?php echo htmlentities(preg_replace('/\?sz\=[0-9]+/i', '', $login_data['user_photo'])); ?>?sz=75"  title="<?php echo htmlentities($login_data['user_name']); ?>" alt="<?php echo htmlentities($login_data['user_name']); ?>"/>
             <div class="user-name"><?php echo htmlentities($login_data['user_name']); ?></div>
             <div class="user-email"><?php echo htmlentities($login_data['user_email']); ?></div>
             <?php } else { ?>
@@ -51,14 +51,14 @@
             <?php } ?>
         </div>
         <div id="a-left-dock-nav">
-            <a href="<?php echo $config['full_domain']; ?>"><div class="icon-beranda"></div>Beranda</a>
-            <a href="<?php echo $config['full_domain']; ?>makan-dong"><div class="icon-makan"></div>Pesan Makan</a>
+            <a href="<?php echo $config['full_domain']; ?>" title="Beranda"><div class="icon-beranda"></div>Beranda</a>
+            <a href="<?php echo $config['full_domain']; ?>makan-dong" title="Pesan Makan"><div class="icon-makan"></div>Pesan Makan</a>
             
             <?php
                 if($is_login) {
             ?>
-            <a href="<?php echo $config['full_domain']; ?>riwayat"><div class="icon-riwayat"></div>Riwayat</a>
-            <a href="<?php echo $config['full_domain']; ?>?logout"><div class="icon-keluar"></div>Keluar</a>
+            <a href="<?php echo $config['full_domain']; ?>riwayat" title="Riwayat"><div class="icon-riwayat"></div>Riwayat</a>
+            <a href="<?php echo $config['full_domain']; ?>?logout" title="Keluar"><div class="icon-keluar"></div>Keluar</a>
             <?php
                 }
             ?>

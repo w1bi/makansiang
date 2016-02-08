@@ -31,7 +31,6 @@
 	$form_tambahan_id	= "";
 	$form_tambahan_harga= 0;
 	$form_pesanan 		= "";
-	$form_pesanuang		= "";
 	$form_pesandonasi	= "";
 	$is_already_order	= false;
 	
@@ -75,7 +74,6 @@
 		$form_tambahan_id	= trim($_POST['tambahan_id']);
 		$form_tambahan_harga= trim($_POST['tambahan_harga']);
 		$form_pesanan 		= trim($_POST['pesan']);
-		$form_pesanuang		= str_replace('.', '', trim($_POST['uang']));
 		$form_pesandonasi	= str_replace('.', '', trim($_POST['donasi']));
 		$form_lantai		= 7;
 		
@@ -91,7 +89,7 @@
 			$form_error = "Waktu pemesanan sudah ditutup";
 		}
 		
-		if($form_error == "" && (!isset($global_menu['menu_' . $form_makanan_id]) || $form_makanan == "" || $form_pesanuang == "" || !ctype_digit($form_pesanuang))) {
+		if($form_error == "" && (!isset($global_menu['menu_' . $form_makanan_id]) || $form_makanan == "")) {
 			$form_error = "Harap isi pesanan dengan lengkap";
 		}
 		
@@ -104,10 +102,6 @@
 			$price_total += $global_menu['menu_' . $form_makanan_id]['menu_harga'];
 			if($form_tambahan_id != "" && isset($global_menu['menu_' . $form_tambahan_id])) {
 				$price_total += $global_menu['menu_' . $form_tambahan_id]['menu_harga'];
-			}
-			
-			if($form_pesanuang < $price_total) {
-				$form_error = "Uang yang anda pakai tidak sesuai atau kurang. Mohon cek kembali.";
 			}
 		}
 			
@@ -122,7 +116,7 @@
 			
 			$sql_insert = "
 			INSERT INTO ms_pesanan
-				(pesan_tanggal, pesan_waktu, pesan_user, pesan_user_email, pesan_user_photo, pesan_gedung, pesan_uang, pesan_uang_donasi, pesan_text)
+				(pesan_tanggal, pesan_waktu, pesan_user, pesan_user_email, pesan_user_photo, pesan_gedung, pesan_uang_donasi, pesan_text)
 			VALUES
 				(CURDATE() , 
 				 CURTIME(), 
@@ -130,7 +124,6 @@
 				 '" . mysqli_real_escape_string($mysql, $login_data['user_email']) . "',
 				 '" . mysqli_real_escape_string($mysql, preg_replace('/\?sz\=[0-9]+/i', '', $login_data['user_photo'])) . "',
 				 '" . mysqli_real_escape_string($mysql, $form_lantai) . "',
-				 '" . mysqli_real_escape_string($mysql, $form_pesanuang) . "',
 				 '" . mysqli_real_escape_string($mysql, $form_pesandonasi) . "',
 				 '" . mysqli_real_escape_string($mysql, $insert_pesanan) . "'
 				)
@@ -170,7 +163,6 @@
 		
 		if($data = mysqli_fetch_array($pesanan_query)) {
 			$form_pesanan = $data[0];
-			$form_pesanuang = $data[1];
 			$form_pesandonasi = $data[2];
 			$cookie_lantai = $data[3];
 			$is_already_order = true;
@@ -320,21 +312,6 @@
                 	<td width="30%" valign="top">Est. Total (Rp):</td>
                     <td>
                     	<input type="text" name="total" id="price-total" class="numberformat menu-readonly" placeholder="500" value="<?php echo htmlentities($form_makanan_harga + $form_tambahan_harga); ?>" readonly="readonly"<?php if(!$is_open){ ?> disabled<?php } ?>/>
-                    </td>
-                </tr>
-                <tr>
-                	<td valign="top">Pakai Uang (Rp):</td>
-                    <td>
-                    	<input type="text" name="uang" class="numberformat" placeholder="50.000" value="<?php echo htmlentities($form_pesanuang); ?>" required<?php if(!$is_open){ ?> disabled<?php } ?>/>
-                    </td>
-                </tr>
-                <tr>
-                	<td></td>
-                	<td>
-                    	<span class="small-text-info">
-                        	<span style="color: #FF0000">NB: </span>
-                            Pembayaran dilakukan di Lantai 7 bersama OB favorit kamu.
-                        </span>
                     </td>
                 </tr>
                 <tr title="Optional">
