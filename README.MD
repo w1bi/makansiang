@@ -26,7 +26,7 @@
 10. *$config['full_domain']* : URL yang kamu akan jadikan web MakanSiang / Default: http://makansiang.ga/
 11. *$config['email_domain']* : Domain E-Mail G+ / Default: tokopedia.com
 12. *$config['max_order_time']* : Maksimal waktu order, format = JamMenit / Default: 1030
-13. &$config['max_order']* : Maksimal pesanan perhari / Default: 50
+13. *$config['max_order']* : Maksimal pesanan perhari / Default: 50
 
 ### Login Backend
 
