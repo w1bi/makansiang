@@ -45,7 +45,7 @@
 			$status_text = '<strong>[ Belum Lunas ]</strong> Rp ' . number_format($uang, 0, '', '.');
 			
 			if($status >= 2) {
-					$status_text = '<strong>[ Lunas ]</strong> Pembayaran Rp ' . number_format($uang, 0, '', '.') . ', Terpakai Rp ' . number_format($uang_terpakai, 0, '', '.') . ', Kembali Rp ' . number_format($uang_kembali, 0, '', '.');
+					$status_text = '<strong>[ Lunas ]</strong> Terpakai Rp ' . number_format($uang_terpakai, 0, '', '.');
 			}
 			
 			// Check menu

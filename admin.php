@@ -99,28 +99,14 @@
         $all_used_saldo 	= 0;
 		$all_bought			= 0;
 		$all_donate			= 0;
-        $all_used_saldo_sql	= mysqli_query($mysql, "SELECT SUM(pesan_uang), SUM(pesan_uang_terpakai), SUM(pesan_uang_donasi) FROM ms_pesanan WHERE pesan_tanggal = '$now_date'");
+        $all_used_saldo_sql	= mysqli_query($mysql, "SELECT SUM(pesan_uang_terpakai), SUM(pesan_uang_donasi) FROM ms_pesanan WHERE pesan_tanggal = '$now_date'");
         
         if($all_used_saldo_data = mysqli_fetch_array($all_used_saldo_sql)) {
-            $all_used_saldo 	= $all_used_saldo_data[0];
-			$all_bought			= $all_used_saldo_data[1];
-            $all_donate 		= $all_used_saldo_data[2];
+			$all_bought			= $all_used_saldo_data[0];
+            $all_donate 		= $all_used_saldo_data[1];
         }
-		
-		$all_saldo_gathered		= 0;
-        $all_saldo_gathered_sql	= mysqli_query($mysql, "SELECT SUM(pesan_uang) FROM ms_pesanan WHERE pesan_tanggal = '$now_date' AND pesan_status > 0");
-		
-		if($all_saldo_gathered_data = mysqli_fetch_array($all_saldo_gathered_sql)) {
-            $all_saldo_gathered	= $all_saldo_gathered_data[0];
-        }
-		
-		$all_saldo_unused		= $all_saldo_gathered - $all_bought - $all_donate;
     ?>
 	<div class="saldo-terpakai-admin">
-    	<div class="uang float-left">
-            Uang Total<br />
-            <strong>Rp <?php echo number_format($all_used_saldo, 0, '', '.'); ?></strong>
-        </div>
 		<div class="uang float-left">
             Donasi<br />
             <strong>Rp <?php echo number_format($all_donate, 0, '', '.'); ?></strong>
@@ -134,10 +120,6 @@
     	<div class="uang float-left">
             Terpakai<br />
             <strong>Rp <?php echo number_format($all_bought, 0, '', '.'); ?></strong>
-        </div>
-    	<div class="uang float-left">
-            Tidak Terpakai<br />
-            <strong>Rp <?php echo number_format($all_saldo_unused, 0, '', '.'); ?></strong>
         </div>
         <div class="clear"></div>
     </div>
