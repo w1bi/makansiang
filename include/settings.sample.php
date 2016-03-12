@@ -14,6 +14,5 @@
 	$config['full_domain']			= "http://makansiang.ga/";	// Full Domain, jangan lupa slash dibelakang. Kalau localhost biasanya http://localhost/makansiang/
 	$config['email_domain']			= "tokopedia.com";			// G+ Domain, disarankan harus memiliki domain sendiri
 	
-	$config['max_order_time']		= "1030";	// Maksimal waktu order, format = JamMenit
 	$config['max_order']			= "50";		// Maksimal orang perhari
 ?>

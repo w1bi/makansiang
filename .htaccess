@@ -95,3 +95,8 @@ RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteCond %{SCRIPT_FILENAME} !-d
 
 RewriteRule ^profil\-admin/?$ admin-profile.php [L,QSA]
+
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+
+RewriteRule ^pengaturan\-jam/?$ admin-time-day.php [L,QSA]

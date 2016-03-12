@@ -112,6 +112,9 @@
         	<?php if(getAdminAccess('c')) { ?>
         	<a class="button-admin float-left" href="<?php echo $config['full_domain']; ?>daftar-pengumuman">&gt; Pengumuman</a>
             <?php } ?>
+        	<?php if(getAdminAccess('e')) { ?>
+        	<a class="button-admin float-left" href="<?php echo $config['full_domain']; ?>pengaturan-jam">&gt; Pengaturan Jam</a>
+            <?php } ?>
         	<?php if(getAdminAccess('d')) { ?>
         	<a class="button-admin float-left" href="<?php echo $config['full_domain']; ?>daftar-admin">&gt; Admin</a>
             <?php } ?>

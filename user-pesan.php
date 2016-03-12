@@ -204,7 +204,7 @@
 <?php 
 	include "include/template-top.php";
 ?>
-<form enctype="application/x-www-form-urlencoded" method="post" action="<?php echo $config['full_domain']; ?>makan-dong">
+<form enctype="application/x-www-form-urlencoded" method="post" action="<?php echo $config['full_domain']; ?>makan-dong" name="form_pesan">
     <div id="table-container">
         <?php if($form_success != "") { ?>
 			<div class="success-text-block"><?php echo htmlentities($form_success, ENT_QUOTES); ?></div>
@@ -265,7 +265,7 @@
                                />
                     	<input type="hidden" name="makanan_id" id="main-food-id" value="<?php echo htmlentities($form_makanan_id); ?>" />
                     	<input type="hidden" name="makanan_harga" class="price-add" id="main-food-price" value="<?php echo htmlentities($form_makanan_harga); ?>" />
-                        <button class="<?php if(!($is_open && $form_makanan_id != "")){ ?>hide <?php } ?>menu-delete" id="main-menu-delete-button" onclick="return changeMainMenu()">Ubah</button>
+                        <button class="<?php if(!($is_open && $form_makanan_id != "")){ ?>hide <?php } ?>menu-delete" type="button" id="main-menu-delete-button" onclick="return changeMainMenu()">Ubah</button>
                     </td>
                 </tr>
                 <tr title="Optional">
@@ -282,7 +282,7 @@
                                />
                     	<input type="hidden" name="tambahan_id" id="side-food-id" value="<?php echo htmlentities($form_tambahan_id); ?>" />
                     	<input type="hidden" name="tambahan_harga" class="price-add" id="side-food-price" value="<?php echo htmlentities($form_tambahan_harga); ?>" />
-                        <button class="<?php if(!($is_open && $form_tambahan_id != "")){ ?>hide <?php } ?>menu-delete" id="side-menu-delete-button" onclick="return changeSideMenu()">Ubah</button>
+                        <button class="<?php if(!($is_open && $form_tambahan_id != "")){ ?>hide <?php } ?>menu-delete" type="button" id="side-menu-delete-button" onclick="return changeSideMenu()">Ubah</button>
                     </td>
                 </tr>
                 <tr>

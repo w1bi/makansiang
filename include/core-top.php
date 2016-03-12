@@ -73,4 +73,19 @@
 		$global_menu['menu_' . $menu_id]["tags"] = explode(",", strtolower($global_get_menu_arr["menu_tag"]));
 		$global_menu['menu_' . $menu_id]["tags"] = array_map('trim', $global_menu['menu_' . $menu_id]["tags"]);
 	}
+	
+	// Get Limit Date
+	$config['max_order_time']		= "0000";
+	
+	$max_order_time_query   = mysqli_query($mysql, "
+								SELECT hari_jam
+								FROM ms_batas_jam
+								WHERE hari_id = " . date("w") ."
+							");
+	
+	if($max_order_time_result = mysqli_fetch_array($max_order_time_query)) {
+		if(strlen($max_order_time_result[0]) == 4 && ctype_digit($max_order_time_result[0])){
+			$config['max_order_time'] = $max_order_time_result[0];
+		}
+	}
 ?>

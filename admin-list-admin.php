@@ -172,6 +172,7 @@
                             <label><input type="checkbox" name="access[]" value="b" /> Halaman Menu</label><br />
                             <label><input type="checkbox" name="access[]" value="c" /> Halaman Pengumuman</label><br />
                             <label><input type="checkbox" name="access[]" value="d" /> Halaman Daftar Admin</label><br />
+                            <label><input type="checkbox" name="access[]" value="e" /> Halaman Pengaturan Jam</label><br />
                         </td>
                     </tr>
                     <tr>
