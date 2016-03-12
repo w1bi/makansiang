@@ -273,7 +273,7 @@ function goParseCountdown(t) {
 	}
 	text += "<strong>" + seconds + "</strong> detik ";
 	$('.time-counter').html(text);
-	setTimeout('goParseCountdown(' + (t - 1) + ')', 1000);
+	setTimeout('goParseCountdown(' + (t - 1) + ')', 970);
 }
 
 
