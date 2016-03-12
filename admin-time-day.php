@@ -28,6 +28,9 @@
 			
 			mysqli_query($mysql, "UPDATE ms_batas_jam SET hari_jam = '$get_hour$get_minute' WHERE hari_id = $i");
 		}
+		
+		die(header("Refresh:0"));
+		
 	}
 ?>
 <?php

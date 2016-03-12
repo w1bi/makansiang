@@ -252,15 +252,14 @@ $('.photo').on('click', function() {
 	document.body.appendChild(blocker);
 });
 
-function goParseCountdown() {
+function goParseCountdown(t) {
 	if($('.button-quota-pesan').length <= 0) {
 		return false;
 	}
 	
-	var t = Date.parse('<?php echo date('d F Y ') . substr($config['max_order_time'], 0, 2) . ':' . substr($config['max_order_time'], 2, 2); ?>:00 GMT+07:00') - Date.parse(new Date());
-	var seconds = Math.floor( (t/1000) % 60 );
-	var minutes = Math.floor( (t/1000/60) % 60 );
-	var hours = Math.floor( (t/(1000*60*60)) % 24 );
+	var seconds = Math.floor( t % 60 );
+	var minutes = Math.floor( (t/60) % 60 );
+	var hours = Math.floor( (t/(60*60)) % 24 );
 	if(t <= 0) {
 		location.href = location.href;
 		return false;
@@ -274,10 +273,16 @@ function goParseCountdown() {
 	}
 	text += "<strong>" + seconds + "</strong> detik ";
 	$('.time-counter').html(text);
-	setTimeout('goParseCountdown()', 1000);
+	setTimeout('goParseCountdown(' + (t - 1) + ')', 1000);
 }
 
-goParseCountdown();
+
+<?php
+$date_max_order_create	= strtotime(date('d F Y ') . substr($config['max_order_time'], 0, 2) . ":" . substr($config['max_order_time'], 2, 2) . ":00");
+$date_create_difference	= $date_max_order_create - time();
+echo "goParseCountdown($date_create_difference);";
+?>
+
 </script>
 </body>
 </html>
