@@ -79,7 +79,7 @@
 				<tbody>
 					<?php for($i = 0; $i < 7; $i++) { ?>
 					<tr>
-						<td width="30%" valign="top">
+						<td width="150" valign="top">
 							<input type="checkbox"
 								name="enable_<?php echo $i; ?>"
 								id="enable_<?php echo $i; ?>"
