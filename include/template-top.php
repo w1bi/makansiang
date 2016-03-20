@@ -1,13 +1,13 @@
 <html>
 <head>
-	<title>Makan Siang Ga?</title>
+	<title>Makan <?php if($config['theme'] == "white") { echo "Siang"; } else { echo "Malam"; } ?> Ga?</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
     <link rel="shortcut icon" type="image/ico" href="<?php echo $config['full_domain']; ?>favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:600,600italic,300,400,400italic">
     <link href="<?php echo $config['full_domain']; ?>style/reset.css" rel="stylesheet" type="text/css">
-    <link href="<?php echo $config['full_domain']; ?>style/global.css" rel="stylesheet" type="text/css">
-    <link href="<?php echo $config['full_domain']; ?>style/table-blue/style.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo $config['full_domain']; ?>style/global.<?php echo $config['theme']; ?>.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo $config['full_domain']; ?>style/table-<?php echo $config['theme']; ?>/style.css" rel="stylesheet" type="text/css">
     <link href="<?php echo $config['full_domain']; ?>style/shake.css" rel="stylesheet" type="text/css">
     <link href="<?php echo $config['full_domain']; ?>style/jquery-ui.css" rel="stylesheet" type="text/css">
     <script src="<?php echo $config['full_domain']; ?>scripts/jquery.min.js" type="text/javascript"></script>
@@ -19,7 +19,7 @@
         
         <div id="logo-top-container">
             <a href="<?php echo $config['full_domain']; ?>">
-                <img src="<?php echo $config['full_domain']; ?>images/top-small.png" class="logo-top" alt="Makan Siang Ga?" />
+                <img src="<?php echo $config['full_domain']; ?>images/top-small-<?php echo $config['theme']; ?>.png" class="logo-top" alt="Makan Siang Ga?" />
             </a>
         </div>
         
