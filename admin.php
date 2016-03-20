@@ -80,7 +80,7 @@
         Yang Makan!
         <?php if($status < 0) { ?>
         <span class="float-right quota-list">
-            <a href="<?php echo $config['full_domain'] . "daftar-pesanan-text/" . $get_time_minus; ?>" class="button-inline-pesan">Mode Hanya Teks &raquo;</a>
+            <a href="<?php echo $config['full_domain'] . "daftar-pesanan-print/" . $get_time_minus; ?>" target="_blank" class="button-inline-pesan">Mode Cetak &raquo;</a>
         </span>
         <?php } ?>
     </h1>
