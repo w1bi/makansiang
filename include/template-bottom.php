@@ -91,7 +91,7 @@
     <?php } ?>
 	<div class="clear"></div>
 	<div id="footer">
-    	&copy; <?php echo date('Y'); ?> MSG v1.5.2 - <a href="http://www.wibisaja.com/" target="_blank">Wibi</a> | <a href="https://github.com/w1bi/makansiang" target="_blank">MakanSiang GitHub Project</a>
+    	&copy; <?php echo date('Y'); ?> MSG v1.6 - <a href="http://www.wibisaja.com/" target="_blank">Wibi</a> | <a href="https://github.com/w1bi/makansiang" target="_blank">MakanSiang GitHub Project</a>
     </div>
 </div>
 <div class="clear"></div>
