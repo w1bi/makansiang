@@ -314,13 +314,13 @@
                     	<input type="text" name="total" id="price-total" class="numberformat menu-readonly" placeholder="500" value="<?php echo htmlentities($form_makanan_harga + $form_tambahan_harga); ?>" readonly="readonly"<?php if(!$is_open){ ?> disabled<?php } ?>/>
                     </td>
                 </tr>
-                <tr title="Optional">
+                <tr title="Optional" style="display: none;">
                 	<td valign="top"><span style="color: #FF0000">*</span> Donasi (Rp):</td>
                     <td>
                     	<input type="text" name="donasi" class="numberformat" placeholder="500" value="<?php if($form_pesandonasi >= 0) { echo htmlentities($form_pesandonasi); } ?>"<?php if(!$is_open){ ?> disabled<?php } ?>/>
                     </td>
                 </tr>
-                <tr>
+                <tr style="display: none;">
                 	<td></td>
                 	<td>
                     	<span class="small-text-info">

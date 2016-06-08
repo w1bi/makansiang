@@ -121,6 +121,32 @@
 			header("Location: " . $config['full_domain'] . "daftar-menu");
 			die();
 		}
+	}		
+	
+	if(isset($_POST['activate_deactivate_bulk'])) {
+		$continue			= true;
+		$form_menu_id		= trim($_POST['menuid']);
+		$form_change_mode	= trim($_POST['activate_deactivate_bulk']);
+		
+		if($form_menu_id == "" || preg_match('/^([0-9]+,)*([0-9]+)$/', $form_menu_id) === false || ($form_change_mode != "1" && $form_change_mode != "2")) {
+			$continue = false;
+		}
+		
+		if($continue) {
+			$insert_update_query = "
+				UPDATE
+					ms_menu
+				SET
+					menu_status = $form_change_mode
+				WHERE
+					menu_id IN ($form_menu_id)
+			";
+				
+			mysqli_query($mysql, $insert_update_query);
+			
+			header("Location: " . $config['full_domain'] . "daftar-menu");
+			die();
+		}
 	}
 ?>
 <?php
@@ -353,8 +379,24 @@
     </div>
     <div class="clear"></div>
     <input type="text" class="find-menu-admin" placeholder="Cari menu..." />
+    <div class="clear" style="margin-top: 10px;">
+        <a class="button-admin float-left" id="activate-bulk" href="javascript:void(0);" style="vertical-align: middle;">Aktifkan</a>
+        <a class="button-admin float-left" id="deactivate-bulk" href="javascript:void(0);" style="vertical-align: middle;">De-Aktifkan</a>
+        <div class="float-left" style="vertical-align: middle; margin-left: 10px; margin-top: 4px;">
+            Tertandai
+            <strong><span id="checked-menu-total">0</span> Menu</strong>
+        </div>
+        <form name="form_aktifkan_bulk_menu" id="form_aktifkan_bulk_menu"
+              enctype="application/x-www-form-urlencoded"
+              method="post"
+              action="<?php echo $config['full_domain']; ?>daftar-menu">
+              <input type="hidden" value="1" name="activate_deactivate_bulk" id="activate_deactivate_bulk" />
+              <input type="hidden" value="" name="menuid" id="menu_id_bulk" />
+        </form>
+    </div>
     <table border="0" id="sortabletable" class="tablesorter">
         <thead>
+            <th width="30" align="center"><input type="checkbox" value="-" name="checkbox-menu" id="checkbox-menu" /></th>
             <th width="70%">Menu</th>
             <th>Rp</th>
         </thead>
@@ -371,6 +413,10 @@
 					$menu_tag		= $list_menu['menu_tag'];
             ?>
             <tr>
+                <td align="center">
+                	<input type="checkbox" value="<?php echo $menu_id; ?>" name="menu_checkbox[]" class="menu_checkbox" />
+                    <div class="table-sort-data hide"></div>
+                </td>
                 <td>
                     <span class="menu-cut-finder"><?php echo $menu_nama; ?></span>
                     <div class="small-text-info float-right">
@@ -407,21 +453,61 @@
 <script src="<?php echo $config['full_domain']; ?>scripts/jquery.number.min.js" type="text/javascript"></script>
 <script src="<?php echo $config['full_domain']; ?>scripts/jquery.tablesorter.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+	var checked_id = [];
 	$('.numberformat').number(true, 0, ',', '.');
 	
 	if($("#sortabletable").find("tbody").find("tr").size() > 0) {
 		$("#sortabletable").tablesorter({
+			headers: { 
+				0: { 
+					sorter: false 
+				}
+			},
 			sortList: [
-						[0,0]
+						[1,0]
 					  ],
 			textExtraction: function(node) { 
 				return node.getElementsByClassName("table-sort-data")[0].innerHTML; 
-			} 
+			}
 		}); 
 	}
 	else {
 		$("#sortabletable").tablesorter()
 	}
+	
+	$('#checkbox-menu').on('change', function() {
+		if($(this).is(":checked")) {
+			$('.menu_checkbox').prop('checked', true).change();
+		}
+		else {
+			$('.menu_checkbox').prop('checked', false).change();
+		}
+	});
+	
+	$('.menu_checkbox').on('change', function() {
+		if($(this).is(":checked")) {
+			$('#checked-menu-total').html(parseInt($('#checked-menu-total').html()) + 1);
+			checked_id.push($(this).val());
+		}
+		else {
+			$('#checked-menu-total').html(parseInt($('#checked-menu-total').html()) - 1);
+			checked_id = jQuery.grep(checked_id, function(value) {
+				return value != $(this).val();
+			});
+		}
+	});
+	
+	$('#activate-bulk').on('click', function() {
+		$('#activate_deactivate_bulk').val(1);
+		$('#menu_id_bulk').val(checked_id.join(','));
+		$('#form_aktifkan_bulk_menu').submit();
+	});
+	
+	$('#deactivate-bulk').on('click', function() {
+		$('#activate_deactivate_bulk').val(2);
+		$('#menu_id_bulk').val(checked_id.join(','));
+		$('#form_aktifkan_bulk_menu').submit();
+	});
 	
 	$('.ubah-menu').on('click', function() {
 		$('.form-menu-all').hide();
