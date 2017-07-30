@@ -31,7 +31,7 @@
 	$form_tambahan_id	= "";
 	$form_tambahan_harga= 0;
 	$form_pesanan 		= "";
-	$form_pesandonasi	= "";
+	$form_pesandonasi	= 500;
 	$is_already_order	= false;
 	
 	if($is_open) {
