@@ -97,6 +97,10 @@
 			$form_error = "Menu Tambahan harus dipilih dari menu!";
 		}
 		
+		if($form_error == "" && ($form_pesandonasi < 500)) {
+			$form_error = "Minimal Donasi adalah Rp. 500,00";
+		}
+		
 		if($form_error == "") {
 			$price_total = $form_pesandonasi;
 			$price_total += $global_menu['menu_' . $form_makanan_id]['menu_harga'];
@@ -314,18 +318,18 @@
                     	<input type="text" name="total" id="price-total" class="numberformat menu-readonly" placeholder="500" value="<?php echo htmlentities($form_makanan_harga + $form_tambahan_harga); ?>" readonly="readonly"<?php if(!$is_open){ ?> disabled<?php } ?>/>
                     </td>
                 </tr>
-                <tr title="Optional" style="display: none;">
-                	<td valign="top"><span style="color: #FF0000">*</span> Donasi (Rp):</td>
+                <tr>
+                	<td valign="top"><span style="color: #FF0000">**</span> Donasi (Rp):</td>
                     <td>
                     	<input type="text" name="donasi" class="numberformat" placeholder="500" value="<?php if($form_pesandonasi >= 0) { echo htmlentities($form_pesandonasi); } ?>"<?php if(!$is_open){ ?> disabled<?php } ?>/>
                     </td>
                 </tr>
-                <tr style="display: none;">
+                <tr >
                 	<td></td>
                 	<td>
                     	<span class="small-text-info">
-                        	<span style="color: #FF0000">*</span>
-                            Opsional, Donasi sepenuhnya akan diberikan untuk OB.<br />
+                        	<span style="color: #FF0000">**</span>
+                            Minimal Rp. 500,00, Donasi sepenuhnya akan diberikan untuk uang jalan.<br />
                         </span>
                     </td>
                 </tr>
