@@ -37,7 +37,7 @@
 	$query_status = "";
 	
 	if($is_open && $get_time_minus <= 0) {
-		echo '<h1>Data belum tersedia untuk dicetak!<br />Harap tunggu pesananan hingga tutup...</h1>';
+		echo '<h1>Data belum tersedia untuk dicetak!<br />Harap tunggu pemesanan hingga tutup...</h1>';
 		echo '<script type="text/javascript">setTimeout("location.reload()", 30000);</script>';
 	} else {
 		if($status >= 0) {
