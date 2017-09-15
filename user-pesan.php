@@ -57,7 +57,7 @@
 				$is_open = false;
 				$date = explode("-", $check_last_paid_fetch[1]);
 				$date_string = $date[2]."/".$date[1]."/".$date[0];
-				$form_error = "Pesanan kamu tanggal " . $date_string . " belum dibayar!\nSegera hubungi OB atau ke Lantai 7!";
+				$form_error = "Pesanan kamu tanggal " . $date_string . " belum dibayar!\nSegera hubungi OB atau ke Lantai 50 Tokopedia Tower (Ciputra World 2)!";
 			}
 		}
 	}
@@ -75,7 +75,7 @@
 		$form_tambahan_harga= trim($_POST['tambahan_harga']);
 		$form_pesanan 		= trim($_POST['pesan']);
 		$form_pesandonasi	= str_replace('.', '', trim($_POST['donasi']));
-		$form_lantai		= 7;
+		$form_lantai		= 50;
 		
 		if(!ctype_digit($form_pesandonasi)) {
 			$form_pesandonasi = 0;
